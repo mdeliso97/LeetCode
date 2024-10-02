@@ -23,27 +23,26 @@ public class PlusOne {
         boolean isNine = false;
 
         for (int i = digits.length - 1; i >= 0; i--) {
+            // Case 1: Current number is 9, set to 0 and report increment for following digit
             if (digits[i] == 9) {
                 // if the digit is 9, set it to 0
                 digits[i] = 0;
                 isNine = true;
+            // Case 2: Current digit is smaller than 9, so we incremented by 1 number
             } else {
                 // if the digit is not 9, increment it by 1 and return the array
                 digits[i]++;
-                isNine = false;
-            }
-
-            if (i == 0 && isNine) {
-                // if the first digit is 9, add 1 to the beginning of the array
-
-                digits = new int[digits.length + 1];
-
-                digits[0] = 1;
-
                 return digits;
             }
 
-            if (!isNine) {
+            // case 3: the first digit of the number is nine, add new entry
+            if (i == 0 && isNine) {
+                // Create new array of integers with length + 1
+                digits = new int[digits.length + 1];
+
+                // Set first entry of digit to 1
+                digits[0] = 1;
+
                 return digits;
             }
         }
