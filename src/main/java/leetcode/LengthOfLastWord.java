@@ -16,7 +16,7 @@ package leetcode;
 */
 
 public class LengthOfLastWord {
-    public static int searchInsert(String s) {
+    public static int lengthOfLastWord(String s) {
         String output = "";
 
         for (int i = s.length() - 1; i >= 0; i--) {
@@ -39,6 +39,6 @@ public class LengthOfLastWord {
     public static void main(String[] args) {
         String s = "luffy is still joyboy";
 
-        System.out.println("Solution:" + searchInsert(s));
+        System.out.println("Solution:" + lengthOfLastWord(s));
     }
 }
