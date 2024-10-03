@@ -21,51 +21,50 @@ package leetcode;
 
 public class AddBinary {
     public static String addBinary(String a, String b) {
-        String strCurrent = "";
-        String output = "";
-        boolean isOne = false;
+        int aInt = 0;
+        int bInt = 0;
 
-        // Select biggest binary number, keep b as smallest string
-        if (a.length() >= b.length()) {
-            strCurrent = a;
-        } else {
-            strCurrent = b;
-            b = a;
+        // test boundary conditions
+        if (a == "0")
+            return b;
 
-            // Add leading zeros to b string to have same length string
-            while (b.length() < strCurrent.length()) {
-                b = "0" + b;
-            }
-        }
+        if (b == "0")
+            return a;
 
-        for (int i = b.length() - 1; i >= 0; i--) {
-            // filter for one
-            if (b.charAt(i) == '1') {
-                if (strCurrent.charAt(i) == '0') {
-                    output = "1" + output;
-                    isOne = false;
-                } else {
-                    output = "0" + output;
-                    isOne = true;
-                }
+        // add two binary strings
+        int maxLength = Math.max(a.length(), b.length());
+
+        // increment the current value only if the index is less than the length of the string
+        for (int i = 0; i < maxLength; i++) {
+            if (i <= a.length() - 1 && Character.getNumericValue(a.charAt(i)) != 0) 
+                aInt += Math.pow(2, a.length() - i - 1);
             
-            // The current character in b string is not 1, we can proceed 
+            // increment the current value only if the index is less than the length of the string
+            if (i <= b.length() - 1 && Character.getNumericValue(b.charAt(i)) != 0)
+                bInt += Math.pow(2, b.length() - i - 1);  
+        }
+
+        aInt = Math.abs(aInt + bInt);
+        a = "";
+
+        while (aInt != 0) {
+            // Checks whether odd number
+            if (aInt % 2 != 0) {
+                a = "1" + a;
+                aInt = (aInt - 1) / 2;
+
             } else {
-                output = strCurrent.charAt(i) + output;
-                continue;
+                a = "0" + a;
+                aInt /= 2;
             }
         }
-
-        if (isOne) {
-            output = "1" + output;
-        }
-
-        return output;
+        //a = "1" + a;
+        return a;
     }
     
     public static void main(String[] args) {
-        String binary0 = "1101";
-        String binary1 = "11011";
+        String binary0 = "0";
+        String binary1 = "0";
 
 
         String binaryStr = addBinary(binary0, binary1);
